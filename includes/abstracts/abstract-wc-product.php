@@ -445,9 +445,12 @@ class WC_Product extends WC_Abstract_Legacy_Product {
 			return apply_filters( 'woocommerce_product_dimensions', wc_format_dimensions( $this->get_dimensions( false ) ), $this );
 		}
 		return array(
-			'length' => $this->get_length(),
-			'width'  => $this->get_width(),
-			'height' => $this->get_height(),
+//			'length' => '<strong>' . __( 'Length', 'woocommerce' ) . ': </strong>' . $this->get_length() . ' ' . get_option( 'woocommerce_dimension_unit' ),
+//			'width'  => '<strong>' . __( 'Width', 'woocommerce' ) . ': </strong>' . $this->get_width() . ' ' . get_option( 'woocommerce_dimension_unit' ),
+//			'height' => '<strong>' . __( 'Height', 'woocommerce' ) . ': </strong>' . $this->get_height() . ' ' . get_option( 'woocommerce_dimension_unit' ),
+            'length' => $this->get_length(),
+            'width'  => $this->get_width(),
+            'height' => $this->get_height(),
 		);
 	}
 
