@@ -120,7 +120,7 @@ class WC_Gateway_BACS extends WC_Payment_Gateway {
 
 		?>
 		<tr valign="top">
-			<th scope="row" class="titledesc"><?php _e( 'Account details', 'woocommerce' ); ?>:</th>
+			<th scope="row" class="titledesc"><?php _e( 'Account Details', 'woocommerce' ); ?>:</th>
 			<td class="forminp" id="bacs_accounts">
 				<table class="widefat wc_input_table sortable" cellspacing="0">
 					<thead>
