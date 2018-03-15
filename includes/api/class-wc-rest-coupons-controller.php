@@ -159,7 +159,6 @@ class WC_REST_Coupons_Controller extends WC_REST_Legacy_Coupons_Controller {
 		}
 
 		return array(
-            'enabled'                     => $data['enabled'],
 			'id'                          => $object->get_id(),
 			'code'                        => $data['code'],
 			'amount'                      => $data['amount'],
@@ -241,7 +240,7 @@ class WC_REST_Coupons_Controller extends WC_REST_Legacy_Coupons_Controller {
 	}
 
 	/**
-	 * Only reutrn writeable props from schema.
+	 * Only return writable props from schema.
 	 *
 	 * @param  array $schema
 	 * @return bool
@@ -328,12 +327,6 @@ class WC_REST_Coupons_Controller extends WC_REST_Legacy_Coupons_Controller {
 			'title'      => $this->post_type,
 			'type'       => 'object',
 			'properties' => array(
-				'enabled' => array(
-					'description' => __( 'Whether coupon can be enabled or disabled to use.', 'woocommerce' ),
-					'type'        => 'boolean',
-					'default'     => true,
-					'context'     => array( 'view', 'edit' ),
-				),
 				'id' => array(
 					'description' => __( 'Unique identifier for the object.', 'woocommerce' ),
 					'type'        => 'integer',
@@ -514,7 +507,7 @@ class WC_REST_Coupons_Controller extends WC_REST_Legacy_Coupons_Controller {
 							),
 							'value' => array(
 								'description' => __( 'Meta value.', 'woocommerce' ),
-								'type'        => 'string',
+								'type'        => 'mixed',
 								'context'     => array( 'view', 'edit' ),
 							),
 						),

@@ -174,7 +174,6 @@ class WC_REST_Coupons_V1_Controller extends WC_REST_Posts_Controller {
 		}
 
 		$data = array(
-            'enabled'                     => $_data['enabled'],
 			'id'                          => $_data['id'],
 			'code'                        => $_data['code'],
 			'date_created'                => $_data['date_created'],
@@ -220,7 +219,7 @@ class WC_REST_Coupons_V1_Controller extends WC_REST_Posts_Controller {
 	}
 
 	/**
-	 * Only reutrn writeable props from schema.
+	 * Only return writable props from schema.
 	 * @param  array $schema
 	 * @return bool
 	 */
@@ -324,7 +323,7 @@ class WC_REST_Coupons_V1_Controller extends WC_REST_Posts_Controller {
 		/**
 		 * Fires after a single item is created or updated via the REST API.
 		 *
-		 * @param object          $post      Inserted object (not a WP_Post object).
+		 * @param WP_Post         $post      Post object.
 		 * @param WP_REST_Request $request   Request object.
 		 * @param boolean         $creating  True when creating item, false when updating.
 		 */
@@ -363,7 +362,7 @@ class WC_REST_Coupons_V1_Controller extends WC_REST_Posts_Controller {
 			/**
 			 * Fires after a single item is created or updated via the REST API.
 			 *
-			 * @param object          $post      Inserted object (not a WP_Post object).
+			 * @param WP_Post         $post      Post object.
 			 * @param WP_REST_Request $request   Request object.
 			 * @param boolean         $creating  True when creating item, false when updating.
 			 */
@@ -412,12 +411,6 @@ class WC_REST_Coupons_V1_Controller extends WC_REST_Posts_Controller {
 			'title'      => $this->post_type,
 			'type'       => 'object',
 			'properties' => array(
-                'enabled' => array(
-                    'description' => __( 'Whether coupon can be enabled or disabled to use.', 'woocommerce' ),
-                    'type'        => 'boolean',
-                    'default'     => true,
-                    'context'     => array( 'view', 'edit' ),
-                ),
 				'id' => array(
 					'description' => __( 'Unique identifier for the object.', 'woocommerce' ),
 					'type'        => 'integer',
