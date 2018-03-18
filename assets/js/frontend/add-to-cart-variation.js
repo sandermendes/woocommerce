@@ -128,7 +128,7 @@
 			attributes        = form.getChosenAttributes(),
 			currentAttributes = attributes.data;
 
-		// if ( attributes.count === attributes.chosenCount ) {
+		if ( attributes.count === attributes.chosenCount ) {
 			if ( form.useAjax ) {
 				if ( form.xhr ) {
 					form.xhr.abort();
@@ -136,13 +136,11 @@
 				form.$form.block( { message: null, overlayCSS: { background: '#fff', opacity: 0.6 } } );
 				currentAttributes.product_id  = parseInt( form.$form.data( 'product_id' ), 10 );
 				currentAttributes.custom_data = form.$form.data( 'custom_data' );
-				console.log(wc_add_to_cart_variation_params.wc_ajax_url.toString().replace( '%%endpoint%%', 'get_variation' ));
 				form.xhr                      = $.ajax( {
 					url: wc_add_to_cart_variation_params.wc_ajax_url.toString().replace( '%%endpoint%%', 'get_variation' ),
 					type: 'POST',
 					data: currentAttributes,
 					success: function( variation ) {
-                        console.log('success');
 						if ( variation ) {
 							form.$form.trigger( 'found_variation', [ variation ] );
 						} else {
@@ -152,7 +150,6 @@
 						}
 					},
 					complete: function() {
-                        console.log('complete');
 						form.$form.unblock();
 					}
 				} );
@@ -170,10 +167,10 @@
 					form.$form.find( '.wc-no-matching-variations' ).slideDown( 200 );
 				}
 			}
-		// } else {
-		// 	form.$form.trigger( 'update_variation_values' );
-		// 	form.$form.trigger( 'reset_data' );
-		// }
+		} else {
+			form.$form.trigger( 'update_variation_values' );
+			form.$form.trigger( 'reset_data' );
+		}
 
 		// Show reset link.
 		form.toggleResetLink( attributes.chosenCount > 0 );
@@ -380,7 +377,7 @@
 
 			// Finally, copy to DOM and set value.
 			current_attr_select.html( new_attr_select.html() );
-			// current_attr_select.find( 'option' + option_gt_filter + ':not(.enabled)' ).prop( 'disabled', true );
+			current_attr_select.find( 'option' + option_gt_filter + ':not(.enabled)' ).prop( 'disabled', true );
 
 			// Choose selected value.
 			if ( selected_attr_val ) {
@@ -551,14 +548,15 @@
 		var $form             = this,
 			$product          = $form.closest( '.product' ),
 			$product_gallery  = $product.find( '.images' ),
-			$gallery_img      = $product.find( '.flex-control-nav li:eq(0) img' ),
+			$gallery_nav      = $product.find( '.flex-control-nav' ),
+			$gallery_img      = $gallery_nav.find( 'li:eq(0) img' ),
 			$product_img_wrap = $product_gallery.find( '.woocommerce-product-gallery__image, .woocommerce-product-gallery__image--placeholder' ).eq( 0 ),
 			$product_img      = $product_img_wrap.find( '.wp-post-image' ),
 			$product_link     = $product_img_wrap.find( 'a' ).eq( 0 );
 
 		if ( variation && variation.image && variation.image.src && variation.image.src.length > 1 ) {
-			if ( $( '.flex-control-nav li img[src="' + variation.image.thumb_src + '"]' ).length > 0 ) {
-				$( '.flex-control-nav li img[src="' + variation.image.thumb_src + '"]' ).trigger( 'click' );
+			if ( $gallery_nav.find( 'li img[src="' + variation.image.thumb_src + '"]' ).length > 0 ) {
+				$gallery_nav.find( 'li img[src="' + variation.image.thumb_src + '"]' ).trigger( 'click' );
 				$form.attr( 'current-image', variation.image_id );
 				return;
 			} else {
