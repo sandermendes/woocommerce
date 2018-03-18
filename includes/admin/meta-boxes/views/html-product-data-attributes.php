@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					foreach ( $attribute_taxonomies as $tax ) {
 						$attribute_taxonomy_name = wc_attribute_taxonomy_name( $tax->attribute_name );
 						$label = $tax->attribute_label ? $tax->attribute_label : $tax->attribute_name;
-						echo '<option value="' . esc_attr( $attribute_taxonomy_name ) . '">' . esc_html( $label ) . '</option>';
+						echo '<option value="' . esc_attr( $attribute_taxonomy_name ) . '">' . esc_html( $label ) . ' - ' . esc_html($tax->attribute_name) . '</option>';
 					}
 				}
 			?>
